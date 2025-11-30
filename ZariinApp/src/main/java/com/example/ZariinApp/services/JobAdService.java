@@ -1,11 +1,11 @@
 package com.example.ZariinApp.services;
 
 import com.example.ZariinApp.dto.JobAdDto;
-import com.example.ZariinApp.entities.JobAd;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface AdService {
+public interface JobAdService {
     JobAdDto createJobAd(JobAdDto jobAdDto);
     JobAdDto getJobAdById(Long jobAdId);
     List<JobAdDto> getAllJobAd();

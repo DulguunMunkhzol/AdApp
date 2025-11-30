@@ -5,11 +5,13 @@ import com.example.ZariinApp.entities.JobAd;
 import com.example.ZariinApp.exception.ResourceNotFoundException;
 import com.example.ZariinApp.mappers.JobAdMapper;
 import com.example.ZariinApp.repositories.JobAdRepository;
-import com.example.ZariinApp.services.AdService;
+import com.example.ZariinApp.services.JobAdService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class AdServiceImpl implements AdService {
+@Service
+public class JobAdServiceImpl implements JobAdService {
     private JobAdRepository jobAdRepository;
     @Override
     public JobAdDto createJobAd(JobAdDto jobAdDto) {
