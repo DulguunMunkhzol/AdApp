@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("api/jobAd")
+@CrossOrigin(origins="http://localhost:5173")
 public class JobAdController {
 
     private final JobAdService jobAdService;

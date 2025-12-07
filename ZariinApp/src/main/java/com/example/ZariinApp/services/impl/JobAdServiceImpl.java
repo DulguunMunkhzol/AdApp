@@ -6,11 +6,13 @@ import com.example.ZariinApp.exception.ResourceNotFoundException;
 import com.example.ZariinApp.mappers.JobAdMapper;
 import com.example.ZariinApp.repositories.JobAdRepository;
 import com.example.ZariinApp.services.JobAdService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class JobAdServiceImpl implements JobAdService {
     private JobAdRepository jobAdRepository;
     @Override
