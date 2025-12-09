@@ -56,7 +56,10 @@ export default function HomePage() {
       <footer className="footer">
         <div className="container">
           <button className="btn btn-accent" onClick={()=>setJobModalOpen(true)}>Post a Job</button>
-          <JobModal open={JobModalOpen} onClose={()=>setJobModalOpen(false)}/>
+            <JobModal 
+            open={JobModalOpen} 
+            onClose={()=>setJobModalOpen(false)}
+            />
         </div>
       </footer>
     </div>

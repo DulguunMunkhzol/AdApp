@@ -4,6 +4,7 @@ export default function JobModal({open, onClose}) {
     return(
         <div>
             <p>Jobs post</p>
+            
             <button onClick={onClose}>close</button>
         </div>
     );
