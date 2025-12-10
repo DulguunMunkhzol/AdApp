@@ -22,6 +22,13 @@ export default function Home() {
     setJobs(prev=>prev.filter(job=>job.id!=id));
   }
 
+  const refreshJobs = async()=>{
+    const res = await fetch("http://localhost:8080/api/jobAd");
+    const data = await res.json();
+    setJobs(data);
+  }
+
+
 
   return (
   <div className="home-root">
@@ -60,6 +67,7 @@ export default function Home() {
         <CreateJobAdModal
         open = {JobModalOpen}
         onClose = {()=>setJobModalOpen(false)}
+        onCreated = {refreshJobs}
         />
       </div>
     </footer>
