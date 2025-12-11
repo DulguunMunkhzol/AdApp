@@ -11,7 +11,9 @@ public class JobAdMapper {
                 jobAd.getAddress(),
                 jobAd.getHiringPosition(),
                 jobAd.getDescription(),
-                jobAd.getHourlyPay()
+                jobAd.getHourlyPay(),
+                jobAd.getEmail(),
+                jobAd.getPhoneNumber()
         );
     }
     public static JobAd mapToJobAd(JobAdDto jobAdDto){
@@ -21,7 +23,9 @@ public class JobAdMapper {
                 jobAdDto.getAddress(),
                 jobAdDto.getHiringPosition(),
                 jobAdDto.getDescription(),
-                jobAdDto.getHourlyPay()
+                jobAdDto.getHourlyPay(),
+                jobAdDto.getEmail(),
+                jobAdDto.getPhoneNumber()
         );
     }
 }

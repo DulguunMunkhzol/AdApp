@@ -14,9 +14,11 @@ const JobCard = ({job, onDelete, refresh}) => {
       <h3>{job.hiringPosition}</h3>
       <p>{job.companyName} - {job.address}</p>
       <p>{job.description}</p>
-      <p>{job.hourlyPay.toFixed(2)} $</p>
+      <p>{job.hourlyPay.toFixed(2)} $/hr</p>
+      <p>{job.email}</p>
+      <p>{job.phoneNumber}</p>
       
-      <button onClick={()=>setOpen(true)}>
+      <button className='btn btn-secondary' onClick={()=>setOpen(true)}>
         View Details
       </button>
 

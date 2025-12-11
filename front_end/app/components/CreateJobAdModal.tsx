@@ -1,12 +1,15 @@
 import React from 'react'
 
+
 const CreateJobAdModal = ({open, onClose, onCreated}) => {
     const [createJobAd, setCreateJobAd] = React.useState({
         hiringPosition: "",
         companyName: "",
         address: "",
         description: "",
-        hourlyPay: 0
+        hourlyPay: 0,
+        email:"",
+        phoneNumber:""
     })
     if(!open) return null;
 
@@ -32,7 +35,9 @@ const CreateJobAdModal = ({open, onClose, onCreated}) => {
                     companyName: "",
                     address: "",
                     description: "",
-                    hourlyPay: 0
+                    hourlyPay: 0,
+                    email:"",
+                    phoneNumber:""
             })
             onClose();
 
@@ -54,17 +59,19 @@ const CreateJobAdModal = ({open, onClose, onCreated}) => {
 
 
   return (
-    <div>
-        <form onSubmit={handleCreateJobAd}>
+    <div className='modal'>
+        <form  onSubmit={handleCreateJobAd}>
 
-                <input type="text" placeholder=" Enter hiring position" name="hiringPosition" value={createJobAd.hiringPosition} onChange={handleChange}/>
-                <input type="text" placeholder=" Enter company name" name="companyName" value={createJobAd.companyName} onChange={handleChange}/>
-                <input type="text" placeholder=" Enter address" name="address" value={createJobAd.address} onChange={handleChange}/>
-                <input type="text" placeholder=" Enter Description" name="description" value={createJobAd.description} onChange={handleChange}/>
-                <input type="number" placeholder=" Enter hourly Pay" name="hourlyPay" value={createJobAd.hourlyPay} onChange={handleChange}/>
-                <button type="submit"> Post </button>
+                <input className='form-input' type="text"  placeholder=" Enter hiring position" name="hiringPosition" value={createJobAd.hiringPosition} onChange={handleChange}/>
+                <input className='form-input' type="text" placeholder=" Enter company name" name="companyName" value={createJobAd.companyName} onChange={handleChange}/>
+                <input className='form-input' type="text" placeholder=" Enter address" name="address" value={createJobAd.address} onChange={handleChange}/>
+                <input className='form-input' type="text" placeholder=" Enter Description" name="description" value={createJobAd.description} onChange={handleChange}/>
+                <input className='form-input' type="number" placeholder=" Enter hourly Pay" name="hourlyPay" value={createJobAd.hourlyPay} onChange={handleChange}/>
+                <input className='form-input' type="text" placeholder=" Enter email" name="email" value={createJobAd.email} onChange={handleChange}/>
+                <input className='form-input' type="text" placeholder=" Enter phone number" name="phoneNumber" value={createJobAd.phoneNumber} onChange={handleChange}/>
+                <button className='btn btn-secondary ' type="submit"> Post </button>
         </form>
-    <button onClick={onClose}>Close</button>
+    <button className='btn btn-danger ' onClick={onClose}>Close</button>
     </div>
   )
 }

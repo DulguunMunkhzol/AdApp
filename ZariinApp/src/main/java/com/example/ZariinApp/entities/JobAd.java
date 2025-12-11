@@ -1,6 +1,7 @@
 package com.example.ZariinApp.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +31,12 @@ public class JobAd {
     @Column(length = 5000, nullable = false)
     private String description;
     @Column(nullable = false)
-            @Min(2)
+    @DecimalMin(value = "0.1", message = "hourlyPay must be positive")
     private BigDecimal hourlyPay;
+    @Column(length = 255, nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String phoneNumber;
 
 
 }

@@ -49,7 +49,8 @@ export default function Home() {
       </div>
     </header>
 
-    <main className="container card-grid">
+    <main >
+      <div className="container cards-grid">
       {jobs.map(job=>(
         <JobCard
         key = {job.id}
@@ -58,6 +59,7 @@ export default function Home() {
         refresh={refreshJobs}
         />
         ))}
+        </div>
     </main>
     
     <footer className="footer">

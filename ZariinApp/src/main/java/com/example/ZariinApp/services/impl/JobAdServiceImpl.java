@@ -8,10 +8,12 @@ import com.example.ZariinApp.repositories.JobAdRepository;
 import com.example.ZariinApp.services.JobAdService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class JobAdServiceImpl implements JobAdService {
     private JobAdRepository jobAdRepository;
@@ -23,6 +25,7 @@ public class JobAdServiceImpl implements JobAdService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public JobAdDto getJobAdById(Long jobAdId) {
         JobAd jobAd = jobAdRepository
                 .findById(jobAdId)
@@ -32,6 +35,7 @@ public class JobAdServiceImpl implements JobAdService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<JobAdDto> getAllJobAd() {
         List<JobAd> jobAdDtoList = jobAdRepository
                 .findAll();
@@ -53,6 +57,8 @@ public class JobAdServiceImpl implements JobAdService {
         jobAd.setDescription(updatedJobAd.getDescription());
         jobAd.setHiringPosition(updatedJobAd.getHiringPosition());
         jobAd.setHourlyPay(updatedJobAd.getHourlyPay());
+        jobAd.setEmail(updatedJobAd.getEmail());
+        jobAd.setPhoneNumber(updatedJobAd.getPhoneNumber());
         JobAd updatedJobAdObject = jobAdRepository.save(jobAd);
 
         return JobAdMapper.mapToJobAdDto(updatedJobAdObject);

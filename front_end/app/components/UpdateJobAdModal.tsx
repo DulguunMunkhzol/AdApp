@@ -6,7 +6,9 @@ const UpdateJobAdModal = ({open, onClose, jobId , onUpdated }) => {
         companyName: "",
         address: "",
         description: "",
-        hourlyPay: 0
+        hourlyPay: 0,
+        email:"",
+        phoneNumber:""
     })
 
     React.useEffect(()=>{
@@ -62,17 +64,19 @@ const UpdateJobAdModal = ({open, onClose, jobId , onUpdated }) => {
     }
 
   return (
-    <div>
+    <div className='modal'>
         <form onSubmit={handleUpdateJobAd}>
-            <input type="text" name="hiringPosition" placeholder="Update Hiring Position" value={updatedJobAd.hiringPosition} onChange={handleChange}/>
-            <input type="text" name="companyName" placeholder='Update Company Name' value={updatedJobAd.companyName} onChange={handleChange}/>
-            <input type="text" name="address" placeholder='Update address' value={updatedJobAd.address} onChange={handleChange}/>
-            <input type="text" name="description" placeholder='Update description' value={updatedJobAd.description} onChange={handleChange}/>
-            <input type="number" name="hourlyPay" placeholder='Update hourly pay' value={updatedJobAd.hourlyPay} onChange={handleChange}/>
-            <p>{jobId}</p>
-            <button type="submit">Update</button>
+            <input className='form-input' type="text" name="hiringPosition" placeholder="Update Hiring Position" value={updatedJobAd.hiringPosition} onChange={handleChange}/>
+            <input className='form-input' type="text" name="companyName" placeholder='Update Company Name' value={updatedJobAd.companyName} onChange={handleChange}/>
+            <input className='form-input' type="text" name="address" placeholder='Update address' value={updatedJobAd.address} onChange={handleChange}/>
+            <input className='form-input' type="text" name="description" placeholder='Update description' value={updatedJobAd.description} onChange={handleChange}/>
+            <input className='form-input' type="number" name="hourlyPay" placeholder='Update hourly pay' value={updatedJobAd.hourlyPay} onChange={handleChange}/>
+            <input className='form-input' type="text"  name="email" placeholder='update email' value={updatedJobAd.email} onChange={handleChange}/>
+            <input className='form-input' type="text" name="phoneNumber" placeholder='update phone number' value={updatedJobAd.phoneNumber} onChange={handleChange}/>
+            {/* <p>{jobId}</p> */}
+            <button className='btn btn-secondary' type="submit">Update</button>
         </form>
-        <button onClick={onClose}>close</button>
+        <button className='btn btn-secondary' onClick={onClose}>close</button>
     </div>
 )
 }

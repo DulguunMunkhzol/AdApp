@@ -2,6 +2,7 @@ package com.example.ZariinApp.controller;
 
 import com.example.ZariinApp.dto.JobAdDto;
 import com.example.ZariinApp.services.JobAdService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class JobAdController {
     private final JobAdService jobAdService;
 
     @PostMapping
-    public ResponseEntity<JobAdDto> createJobAd(@RequestBody JobAdDto jobAdDto){
+    public ResponseEntity<JobAdDto> createJobAd(@Valid @RequestBody JobAdDto jobAdDto){
         JobAdDto saveJobAdDto = jobAdService.createJobAd(jobAdDto);
         return new ResponseEntity<>(saveJobAdDto, HttpStatus.CREATED);
     }
@@ -35,7 +36,7 @@ public class JobAdController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<JobAdDto> updateJobAdById(@PathVariable("id") Long jobAdId,
-                                                    @RequestBody JobAdDto updatedJobAdDto){
+                                                    @Valid @RequestBody JobAdDto updatedJobAdDto){
         JobAdDto jobAdDto = jobAdService.updateJobAd(jobAdId,updatedJobAdDto);
         return ResponseEntity.ok(jobAdDto);
     }
