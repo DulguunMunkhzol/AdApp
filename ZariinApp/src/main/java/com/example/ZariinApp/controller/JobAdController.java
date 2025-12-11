@@ -29,11 +29,11 @@ public class JobAdController {
     }
     @GetMapping
     public ResponseEntity<List<JobAdDto>> getAllJobAds(){
-        List<JobAdDto> jobAdDtos = jobAdService.getAllJobAd();
-        return ResponseEntity.ok(jobAdDtos);
+        List<JobAdDto> jobAdDto = jobAdService.getAllJobAd();
+        return ResponseEntity.ok(jobAdDto);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<JobAdDto> updateJobAdById(@PathVariable("id") Long jobAdId,
                                                     @RequestBody JobAdDto updatedJobAdDto){
         JobAdDto jobAdDto = jobAdService.updateJobAd(jobAdId,updatedJobAdDto);

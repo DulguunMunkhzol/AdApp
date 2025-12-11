@@ -1,10 +1,14 @@
 import React from 'react'
 import ShowDetailModal from './ShowDetailModal';
 import DeleteJobAdBtn from './DeleteJobAdBtn';
+import UpdateJobAdModal from './UpdateJobAdModal';
+import { refresh } from 'next/cache';
 
-const JobCard = ({job, onDelete}) => {
+const JobCard = ({job, onDelete, refresh}) => {
   const [open, setOpen] = React.useState(false);
-  
+  const [openUpdateModal, setOpenUpdateModal]=React.useState(false);
+
+    
   return (
     <article className="card">
       <h3>{job.hiringPosition}</h3>
@@ -22,6 +26,21 @@ const JobCard = ({job, onDelete}) => {
       jobId={job.id}
       onDelete = {onDelete}
       />
+
+      <button
+      className="btn btn-secondary" 
+      onClick ={()=> setOpenUpdateModal(true)}>
+        Edit Job Ad
+      </button>
+
+      <UpdateJobAdModal
+      open = {openUpdateModal}
+      onClose = {()=>setOpenUpdateModal(false)}
+      jobId={job.id}
+      onUpdated={refresh}
+      />
+      
+
 
     </article>
   )

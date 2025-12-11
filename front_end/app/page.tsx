@@ -55,6 +55,7 @@ export default function Home() {
         key = {job.id}
         job={job}
         onDelete={handleDelete}
+        refresh={refreshJobs}
         />
         ))}
     </main>
