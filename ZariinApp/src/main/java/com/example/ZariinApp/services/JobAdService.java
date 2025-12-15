@@ -11,4 +11,5 @@ public interface JobAdService {
     List<JobAdDto> getAllJobAd();
     JobAdDto updateJobAd(Long jobId, JobAdDto updatedJobAd);
     void deleteJobAd(Long jobId);
+    List<JobAdDto> getJobAdsByString(String search, int page, int size);
 }

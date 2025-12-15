@@ -34,7 +34,7 @@ public class JobAdController {
         return ResponseEntity.ok(jobAdDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<JobAdDto> updateJobAdById(@PathVariable("id") Long jobAdId,
                                                     @Valid @RequestBody JobAdDto updatedJobAdDto){
         JobAdDto jobAdDto = jobAdService.updateJobAd(jobAdId,updatedJobAdDto);
@@ -45,6 +45,14 @@ public class JobAdController {
     public ResponseEntity<String> deleteJobById(@PathVariable("id") Long jobAdId){
         jobAdService.deleteJobAd(jobAdId);
         return ResponseEntity.ok("Job Ad deleted Successfully");
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<JobAdDto>> getJobAdByString(
+            @RequestParam("search") String search,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size){
+        List<JobAdDto> jobAdDtos = jobAdService.getJobAdsByString(search, page, size);
+        return ResponseEntity.ok(jobAdDtos);
     }
 
 }

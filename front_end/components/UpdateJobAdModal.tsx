@@ -33,7 +33,7 @@ const UpdateJobAdModal = ({open, onClose, jobId , onUpdated }) => {
     const handleUpdateJobAd = async (e)=>{
         e.preventDefault();
         try{
-            const res = await fetch(`http://localhost:8080/api/jobAd/update/${jobId}`,
+            const res = await fetch(`http://localhost:8080/api/jobAd/${jobId}`,
                 {
                 method: "PUT",
                 headers: {"content-type":"application/json"},
@@ -43,8 +43,16 @@ const UpdateJobAdModal = ({open, onClose, jobId , onUpdated }) => {
             
             await onUpdated();
             if(!res.ok){
-                const ErrorData = await res.json();
-                const message = ErrorData.message||"Failed to Update Job Ad";
+                const errorData = await res.json();
+
+                let message = "Failed to update job ad";
+                if(errorData.error){
+                    message =errorData.error;
+
+                }else{
+                    message =Object.values(errorData).join(", ");
+                }
+
                 throw new Error(message);
             }
             onClose();

@@ -24,8 +24,14 @@ const CreateJobAdModal = ({open, onClose, onCreated}) => {
             );
             if(!res.ok){
                 const ErrorData = await res.json();
-                const message = ErrorData.message || "Failed to create job ad";
 
+                let message = "Failed to create job ad";
+                if(ErrorData.error){
+                    message =ErrorData.error;
+                }else{
+                    message =Object.values(ErrorData).join(", ");
+                }
+                
                 throw new Error( message);
             }
             

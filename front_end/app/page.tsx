@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import React, { useEffect } from "react";
-import JobCard from "./components/JobCard";
-import CreateJobAdModal from "./components/CreateJobAdModal";
+import JobCard from "../components/JobCard";
+import CreateJobAdModal from "../components/CreateJobAdModal";
 
 
 export default function Home() {
