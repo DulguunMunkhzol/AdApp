@@ -84,7 +84,7 @@ const UpdateJobAdModal = ({open, onClose, jobId , onUpdated }) => {
             {/* <p>{jobId}</p> */}
             <button className='btn btn-secondary' type="submit">Update</button>
         </form>
-        <button className='btn btn-secondary' onClick={onClose}>close</button>
+        <button className='btn btn-danger' onClick={onClose}>close</button>
     </div>
 )
 }

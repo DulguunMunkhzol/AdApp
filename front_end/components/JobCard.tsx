@@ -2,7 +2,6 @@ import React from 'react'
 import ShowDetailModal from './ShowDetailModal';
 import DeleteJobAdBtn from './DeleteJobAdBtn';
 import UpdateJobAdModal from './UpdateJobAdModal';
-import { refresh } from 'next/cache';
 
 const JobCard = ({job, onDelete, refresh}) => {
   const [open, setOpen] = React.useState(false);

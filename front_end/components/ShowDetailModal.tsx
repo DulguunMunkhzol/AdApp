@@ -11,7 +11,7 @@ const ShowDetailModal = ({open, onClose, job}) => {
         <p><strong>Hourly Pay:</strong> {job.hourlyPay.toFixed(2)} $</p>
         <p><strong>email:</strong> {job.email}</p>
         <p><strong>phone number:</strong> {job.phoneNumber}</p>
-        <button className="btn btn-secondary" onClick={onClose}>Close</button>
+        <button className="btn btn-danger" onClick={onClose}>Close</button>
     </div>
   )
 }

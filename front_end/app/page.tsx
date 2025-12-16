@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect } from "react";
 import JobCard from "../components/JobCard";
 import CreateJobAdModal from "../components/CreateJobAdModal";
-
+import SearchJobAdsModal from "../components/SearchJobAdsModal";
 
 export default function Home() {
   const [JobModalOpen, setJobModalOpen] = React.useState(false);
-
-
+  const [JobSearchModalOpen, setJobSearchModalOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
   const [jobs, setJobs] = React.useState([]);
+
   useEffect(()=>{
     fetch("http://localhost:8080/api/jobAd")
     .then(res=>res.json())
@@ -28,7 +28,12 @@ export default function Home() {
     setJobs(data);
   }
 
-
+  const handleSearch = async(e)=>{
+    e.preventDefault()
+    if(!search.trim()) return;
+    setJobSearchModalOpen(true);
+   
+  }
 
   return (
   <div className="home-root">
@@ -38,14 +43,30 @@ export default function Home() {
           Find your Next Job
         </h1>
         <p className="subtitle">Browse thousands of job ads or post your own.</p>
-        <div className="search">
-          <input 
-          type="text" 
-          placeholder="Search jobs titles, companies...."
-          className="search-input"
-          />
-          <button className="btn btn-primary">Search</button>
+        
+        <div >
+          <form onSubmit={handleSearch} className="search">
+            <input 
+              type="text"
+              className="search-input" 
+              placeholder="Search jobs titles, companies...." 
+              name="search" 
+              value={search} 
+              onChange={(e)=> setSearch(e.target.value)} 
+            />
+            <button className="btn btn-primary" type="submit">
+              search
+            </button>
+          </form >
+          <div>
+            <SearchJobAdsModal
+            open={JobSearchModalOpen}
+            onClose = {()=>setJobSearchModalOpen(false)}
+            search={search}
+            />
+          </div>
         </div>
+
       </div>
     </header>
 
