@@ -6,9 +6,8 @@ import com.example.ZariinApp.exception.ResourceNotFoundException;
 import com.example.ZariinApp.mappers.JobAdMapper;
 import com.example.ZariinApp.repositories.JobAdRepository;
 import com.example.ZariinApp.services.JobAdService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.hibernate.sql.ast.tree.expression.Collation;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -81,15 +78,18 @@ public class JobAdServiceImpl implements JobAdService {
         jobAdRepository.delete(jobAd);
     }
     @Override
-    public List<JobAdDto> getJobAdsByString(String search, int page, int size){
-        if(search == null || search.isBlank()){
-            return Collections.emptyList();
-        }
+    public Page<JobAdDto> getJobAdsByString(String search, int page, int size){
+
+        Page<JobAd> jobAdsPage;
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
 
-        List<JobAd> foundJobAd = jobAdRepository.searchByString(search, pageable);
-        return foundJobAd.stream()
-                .map(JobAdMapper::mapToJobAdDto)
-                .toList();
+        if(search == null || search.isBlank()){
+            jobAdsPage = jobAdRepository.findAll(pageable);
+        }else{
+            jobAdsPage = jobAdRepository.searchByString(search, pageable);
+        }
+
+
+        return jobAdsPage.map(JobAdMapper::mapToJobAdDto);
     }
 }

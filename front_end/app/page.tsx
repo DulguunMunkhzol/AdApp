@@ -49,7 +49,7 @@ export default function Home() {
             <input 
               type="text"
               className="search-input" 
-              placeholder="Search jobs titles, companies...." 
+              placeholder="Search jobs titles, companies, address and hourly pay" 
               name="search" 
               value={search} 
               onChange={(e)=> setSearch(e.target.value)} 

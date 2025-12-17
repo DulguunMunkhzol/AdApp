@@ -1,6 +1,7 @@
 package com.example.ZariinApp.repositories;
 
 import com.example.ZariinApp.entities.JobAd;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,5 @@ public interface JobAdRepository extends JpaRepository<JobAd, Long> {
             "OR LOWER(j.address) LIKE LOWER(CONCAT('%', :search, '%')) " +
             "OR LOWER(j.hiringPosition) LIKE LOWER(CONCAT('%', :search, '%')) " +
             "OR STR(j.hourlyPay) LIKE CONCAT('%', :search, '%')")
-    List<JobAd> searchByString(@Param("search") String search, Pageable pageable);
+    Page<JobAd> searchByString(@Param("search") String search, Pageable pageable);
 }

@@ -1,6 +1,7 @@
 package com.example.ZariinApp.services;
 
 import com.example.ZariinApp.dto.JobAdDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface JobAdService {
     List<JobAdDto> getAllJobAd();
     JobAdDto updateJobAd(Long jobId, JobAdDto updatedJobAd);
     void deleteJobAd(Long jobId);
-    List<JobAdDto> getJobAdsByString(String search, int page, int size);
+    Page<JobAdDto> getJobAdsByString(String search, int page, int size);
 }
