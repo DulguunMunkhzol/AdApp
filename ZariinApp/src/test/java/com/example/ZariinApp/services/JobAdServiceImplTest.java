@@ -2,6 +2,7 @@ package com.example.ZariinApp.services;
 
 import com.example.ZariinApp.dto.JobAdDto;
 import com.example.ZariinApp.entities.JobAd;
+import com.example.ZariinApp.exception.ResourceNotFoundException;
 import com.example.ZariinApp.repositories.JobAdRepository;
 import com.example.ZariinApp.services.impl.JobAdServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -21,6 +23,8 @@ import static org.mockito.Mockito.*;
 class JobAdServiceImplTest {
     @Mock
     private JobAdRepository jobAdRepository;
+
+
 
     @InjectMocks
     private JobAdServiceImpl jobAdService;
@@ -51,7 +55,7 @@ class JobAdServiceImplTest {
     @Test
     void getJobAdDtoById_shouldReturnDto(){
         long idSearch = 1;
-        JobAd readFrom = new JobAd(
+        JobAd entity = new JobAd(
                 1,"company",
                 "address",
                 "hiringPosition",
@@ -61,17 +65,24 @@ class JobAdServiceImplTest {
                 "1234567890"
         );
 
-        when(jobAdRepository.save(any(JobAd.class))).thenReturn(readFrom);
+        when(jobAdRepository.findById(idSearch)).thenReturn(Optional.of(entity));
 
         JobAdDto result = jobAdService.getJobAdById(idSearch);
 
         assertNotNull(result);
         assertEquals("company", result.getCompanyName());
-        assertEquals(BigDecimal.valueOf(123.02), result.getHourlyPay());
+        assertEquals(0, result.getHourlyPay().compareTo(BigDecimal.valueOf(123.02)));
 
-        verify(jobAdRepository, times(1)).save(any(JobAd.class));
+        verify(jobAdRepository, times(1)).findById(idSearch);
+        verifyNoMoreInteractions(jobAdRepository);
+    }
 
-
-
+    @Test
+    void getJobAdDtoById_WhenNotFound_ShouldThrowException(){
+        long idSearch=1;
+        when(jobAdRepository.findById(idSearch)).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, ()-> jobAdService.getJobAdById(idSearch));
+        verify(jobAdRepository, times(1)).findById(idSearch);
+        verifyNoMoreInteractions(jobAdRepository);
     }
 }
