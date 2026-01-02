@@ -3,6 +3,7 @@ package com.example.ZariinApp.services;
 import com.example.ZariinApp.dto.JobAdDto;
 import com.example.ZariinApp.entities.JobAd;
 import com.example.ZariinApp.exception.ResourceNotFoundException;
+import com.example.ZariinApp.mappers.JobAdMapper;
 import com.example.ZariinApp.repositories.JobAdRepository;
 import com.example.ZariinApp.services.impl.JobAdServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,6 @@ import static org.mockito.Mockito.*;
 class JobAdServiceImplTest {
     @Mock
     private JobAdRepository jobAdRepository;
-
-
 
     @InjectMocks
     private JobAdServiceImpl jobAdService;
@@ -85,4 +84,42 @@ class JobAdServiceImplTest {
         verify(jobAdRepository, times(1)).findById(idSearch);
         verifyNoMoreInteractions(jobAdRepository);
     }
+
+    @Test
+    void updateJobAd_ShouldReturnUpdatedJobAdDto(){
+        long idUpdate = 1L;
+
+        JobAd jobAd = new JobAd(1,
+                "address",
+                "company",
+                "description",
+                "hhiringPosition",
+                BigDecimal.valueOf(2),
+                "somethhing@mail.com",
+                "0987654321");
+        JobAd updateJobAd = new JobAd(1,
+                "companyNameUpdate",
+                "addressUpdate",
+                "descriptionUpdate",
+                "hhiringPositionUpdate",
+                BigDecimal.valueOf(2),
+                "somethhing@mail.com",
+                "0987654321");
+        when(jobAdRepository.findById(idUpdate)).thenReturn(Optional.of(jobAd));
+        when(jobAdRepository.save(any(JobAd.class))).thenReturn(jobAd);
+
+
+        JobAdDto result = jobAdService.updateJobAd(idUpdate, JobAdMapper.mapToJobAdDto(updateJobAd));
+
+        assertNotNull(result);
+        assertEquals("companyNameUpdate",result.getCompanyName());
+        assertEquals("0987654321", result.getPhoneNumber());
+        verify(jobAdRepository,times(1)).findById(idUpdate);
+        verify(jobAdRepository,times(1)).save(jobAd);
+        verifyNoMoreInteractions(jobAdRepository);
+    }
+
+
+
+
 }
