@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,8 +117,7 @@ class JobAdServiceImplTest {
         verify(jobAdRepository,times(1)).save(jobAd);
         verifyNoMoreInteractions(jobAdRepository);
     }
-
-
+    
 
 
 }
