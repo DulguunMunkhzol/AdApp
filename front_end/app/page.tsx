@@ -72,15 +72,17 @@ export default function Home() {
 
     <main >
       <div className="container cards-grid">
-      {jobs.map(job=>(
+      {jobs.content?.map((job)=>(
         <JobCard
         key = {job.id}
         job={job}
         onDelete={handleDelete}
         refresh={refreshJobs}
+        
         />
         ))}
         </div>
+        
     </main>
     
     <footer className="footer">

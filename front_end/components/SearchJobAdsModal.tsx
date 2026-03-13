@@ -54,7 +54,8 @@ const SearchJobAdsModal = ({open, onClose, search}) => {
             
         </div>
         <div>
-            <button
+        
+            <button className="btn btn-primary"
             onClick={()=>fetchJobs(page-1)}
             disabled={page === 0}
             >
@@ -63,7 +64,7 @@ const SearchJobAdsModal = ({open, onClose, search}) => {
             <span>
                 Page {page+1} of {totalPages}
             </span>
-            <button
+            <button className="btn btn-primary"
             onClick={()=>fetchJobs(page+1)}
             disabled={page+1>=totalPages}
             >
